@@ -49,3 +49,6 @@ commands:
     aliases:
       - setworldspawn
       - spawnset
+  spawn:
+    description: teleports the user to spawn
+    usage: /<command>
