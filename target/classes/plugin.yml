@@ -1,0 +1,11 @@
+name: Firstplugin
+version: '1.0-SNAPSHOT'
+main: me.itzsimplyjoe.firstplugin.Firstplugin
+api-version: 1.19
+authors: [ItzSimplyJoe]
+description: My First Plugin
+website: https://itzsimplyjoe.me
+commands:
+  c:
+    description: puts the user into creative mode
+    usage: /<command>

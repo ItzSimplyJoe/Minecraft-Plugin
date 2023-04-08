@@ -1,0 +1,39 @@
+name: Firstplugin
+version: '${project.version}'
+main: me.itzsimplyjoe.firstplugin.Firstplugin
+api-version: 1.19
+authors: [ItzSimplyJoe]
+description: My First Plugin
+website: https://itzsimplyjoe.me
+commands:
+  c:
+    description: puts the user into creative mode
+    usage: /<command>
+    aliases:
+      - creative
+      - gmc
+  a:
+    description: puts the user into adventure mode
+    usage: /<command>
+    aliases:
+      - adventure
+      - gma
+  s:
+    description: puts the user into survival mode
+    usage: /<command>
+    aliases:
+      - survival
+      - gms
+      - surv
+  sp:
+    description: puts the user into spectator mode
+    usage: /<command>
+    aliases:
+      - spectator
+      - gmsp
+  feed:
+    description: sets the players hunger to full
+    usage: /<command>
+    aliases:
+      - feedme
+      - nomorehungryness
