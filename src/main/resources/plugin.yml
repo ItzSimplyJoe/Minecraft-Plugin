@@ -37,3 +37,15 @@ commands:
     aliases:
       - feedme
       - nomorehungryness
+  god:
+    description: makes the user invulnerable
+    usage: /<command>
+    aliases:
+      - godmode
+      - invincible
+  setspawn:
+    description: sets the spawn of the server
+    usage: /<command>
+    aliases:
+      - setworldspawn
+      - spawnset
