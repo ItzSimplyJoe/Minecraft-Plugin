@@ -18,6 +18,11 @@
  - /spawn to teleport to this spawnpoint
  - /bangui to open a ban gui
  - /rtp to teleport to a random location
+ - Scoreboard
+ - MOTD
+ 
+## Customisability
+You can customise many things such as error messages, success messages, MOTD, scoreboards, in the config.yml file!
  
 ## Contribution Guidelines
 If you would like to contribute to this project, please follow these guidelines:
