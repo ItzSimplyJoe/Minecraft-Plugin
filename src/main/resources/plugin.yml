@@ -52,3 +52,17 @@ commands:
   spawn:
     description: teleports the user to spawn
     usage: /<command>
+  ban:
+    description: opens a ban gui
+    usage: /<command>
+    aliases:
+      - banmenu
+      - ban
+      - banui
+      - bans
+  rtp:
+    description: teleports the user to a random location
+    usage: /<command>
+    aliases:
+      - randomtp
+      - randomteleport

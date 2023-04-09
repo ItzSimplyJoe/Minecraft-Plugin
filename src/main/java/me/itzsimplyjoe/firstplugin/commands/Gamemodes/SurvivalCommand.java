@@ -1,5 +1,6 @@
 package me.itzsimplyjoe.firstplugin.commands.Gamemodes;
 
+import me.itzsimplyjoe.firstplugin.Firstplugin;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
@@ -7,7 +8,15 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
+
 public class SurvivalCommand implements CommandExecutor {
+
+    static Firstplugin plugin;
+
+    public SurvivalCommand(Firstplugin plugin){
+        this.plugin = plugin;
+    }
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if (commandSender instanceof Player){
@@ -20,7 +29,7 @@ public class SurvivalCommand implements CommandExecutor {
                         p.setGameMode(GameMode.SURVIVAL);
                     }
                 }else{
-                    p.sendMessage("§cYou don't have permission to run this command");
+                    p.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("error-message-no-permission")));
                 }
             }else{
                 String playerName = args[0];
@@ -28,7 +37,7 @@ public class SurvivalCommand implements CommandExecutor {
                 Player p = (Player) commandSender;
                 if (p.hasPermission("firstplugin.survival.others")){
                     if (target == null){
-                        p.sendMessage("This player isn't online");
+                        p.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("error-message-player-not-found")));
                     }else{
                         if (target.getGameMode() == GameMode.SURVIVAL) {
                             p.sendMessage("§cThis player is already in survival");
@@ -37,7 +46,7 @@ public class SurvivalCommand implements CommandExecutor {
                         }
                     }
                 }else{
-                    p.sendMessage("§cYou don't have permission to run this command");
+                    p.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("error-message-no-permission")));
                 }
             }
         }else{

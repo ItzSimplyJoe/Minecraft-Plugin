@@ -1,12 +1,20 @@
-package me.itzsimplyjoe.firstplugin.commands;
+package me.itzsimplyjoe.firstplugin.commands.QOL;
 
+import me.itzsimplyjoe.firstplugin.Firstplugin;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
+
 public class GodCommand implements CommandExecutor {
+    static Firstplugin plugin;
+
+    public GodCommand(Firstplugin plugin){
+        this.plugin = plugin;
+    }
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if (commandSender instanceof Player) {
@@ -21,7 +29,7 @@ public class GodCommand implements CommandExecutor {
                         p.sendMessage("§aGod Mode has been enabled");
                     }
                 } else {
-                    p.sendMessage("§cYou don't have permission to run this command");
+                    p.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("error-message-no-permission")));
                 }
             }else{
                 String playerName = args[0];
@@ -29,7 +37,7 @@ public class GodCommand implements CommandExecutor {
                 Player p = (Player) commandSender;
                 if (p.hasPermission("firstplugin.god.others")) {
                     if (target == null) {
-                        p.sendMessage("This player isn't online");
+                        p.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("error-message-player-not-found")));
                     } else {
                         if (target.isInvulnerable()) {
                             target.setInvulnerable(false);
@@ -43,7 +51,7 @@ public class GodCommand implements CommandExecutor {
                         }
                     }
                 }else {
-                    p.sendMessage("§cYou don't have permission to run this command");
+                    p.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("error-message-no-permission")));
                 }
             }
                 } else {

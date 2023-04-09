@@ -1,12 +1,21 @@
-package me.itzsimplyjoe.firstplugin.commands;
+package me.itzsimplyjoe.firstplugin.commands.QOL;
 
+import me.itzsimplyjoe.firstplugin.Firstplugin;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
+
 public class FeedCommand implements CommandExecutor {
+
+    static Firstplugin plugin;
+
+    public FeedCommand(Firstplugin plugin){
+        this.plugin = plugin;
+    }
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if (commandSender instanceof Player){
@@ -20,7 +29,7 @@ public class FeedCommand implements CommandExecutor {
                         p.setFoodLevel(20);
                     }
                 }else{
-                    p.sendMessage("§cYou don't have permission to run this command");
+                    p.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("error-message-no-permission")));
                 }
             }else{
                     String playerName = args[0];
@@ -28,12 +37,12 @@ public class FeedCommand implements CommandExecutor {
                     Player p = (Player) commandSender;
                     if (p.hasPermission("firstplugin.feed.others")){
                         if (target == null){
-                            p.sendMessage("This player isn't online");
+                            p.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("error-message-player-not-found")));
                         }else{
                             target.setFoodLevel(20);
                         }
                     }else{
-                        p.sendMessage("§cYou don't have permission to run this command");
+                        p.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("error-message-no-permission")));
                     }
                 }
         }else{

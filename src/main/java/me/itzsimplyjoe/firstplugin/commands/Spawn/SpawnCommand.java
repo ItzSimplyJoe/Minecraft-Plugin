@@ -7,6 +7,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
+
 public class SpawnCommand implements CommandExecutor {
 
     private final Firstplugin plugin;
@@ -29,11 +31,8 @@ public class SpawnCommand implements CommandExecutor {
                     p.sendMessage("§7No spawn point has been set yet!");
                 }
             }else{
-                p.sendMessage("§cYou don't have permission for this!");
+                p.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("error-message-no-permission")));
             }
-
-
-
         }else{
             System.out.println("Only a player can run this command");
         }

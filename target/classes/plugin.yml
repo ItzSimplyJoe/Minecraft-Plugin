@@ -9,3 +9,60 @@ commands:
   c:
     description: puts the user into creative mode
     usage: /<command>
+    aliases:
+      - creative
+      - gmc
+  a:
+    description: puts the user into adventure mode
+    usage: /<command>
+    aliases:
+      - adventure
+      - gma
+  s:
+    description: puts the user into survival mode
+    usage: /<command>
+    aliases:
+      - survival
+      - gms
+      - surv
+  sp:
+    description: puts the user into spectator mode
+    usage: /<command>
+    aliases:
+      - spectator
+      - gmsp
+  feed:
+    description: sets the players hunger to full
+    usage: /<command>
+    aliases:
+      - feedme
+      - nomorehungryness
+  god:
+    description: makes the user invulnerable
+    usage: /<command>
+    aliases:
+      - godmode
+      - invincible
+  setspawn:
+    description: sets the spawn of the server
+    usage: /<command>
+    aliases:
+      - setworldspawn
+      - spawnset
+  spawn:
+    description: teleports the user to spawn
+    usage: /<command>
+  ban:
+    description: opens a ban gui
+    usage: /<command>
+    aliases:
+      - banmenu
+      - ban
+      - banui
+      - bans
+  rtp:
+    description: teleports the user to a random location
+    usage: /<command>
+    aliases:
+      - randomtp
+      - randomteleport
