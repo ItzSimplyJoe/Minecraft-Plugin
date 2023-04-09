@@ -24,6 +24,16 @@ motd-message:
   - ""
   - "§7This is a test server!"
   - "§7Enjoy your stay!"
+
+## ------------------------- Scoreboard ------------------------- ##
+scoreboard: true
+scoreboard-name: "§b§lTest Server"
+scoreboard-text:
+    - "§7This is a test server!"
+    - "§7Enjoy your stay!"
+    - ""
+    - "§7Online: §a{online}"
+
 ## ------------------------- Spawn Coordinates ------------------------- ##
 
 spawn:

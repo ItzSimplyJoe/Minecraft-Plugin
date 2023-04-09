@@ -2,6 +2,7 @@ package me.itzsimplyjoe.firstplugin;
 
 import me.itzsimplyjoe.firstplugin.Listeners.OnJoin;
 import me.itzsimplyjoe.firstplugin.Listeners.OnLeave;
+import me.itzsimplyjoe.firstplugin.Scoreboards.OpenScoreboardCommand;
 import me.itzsimplyjoe.firstplugin.commands.Gamemodes.AdventureCommand;
 import me.itzsimplyjoe.firstplugin.commands.Gamemodes.CreativeCommand;
 import me.itzsimplyjoe.firstplugin.commands.Gamemodes.SpectatorCommand;
@@ -41,6 +42,7 @@ public final class Firstplugin extends JavaPlugin {
         getCommand("spawn").setExecutor(new SpawnCommand(this));
         getCommand("rtp").setExecutor(new RandomTPCommand(this));
         getCommand("vanish").setExecutor(new VanishCommand(this));
+        getCommand("sb").setExecutor(new OpenScoreboardCommand(this));
         TeleportUtils utils = new TeleportUtils(this);
     }
 
