@@ -28,19 +28,20 @@ public class OnJoin implements Listener {
         Player player = event.getPlayer();
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard scoreboard = manager.getNewScoreboard();
-
-        Objective objective = scoreboard.registerNewObjective("Test", "dummy", "Test");
+        String title = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("scoreboard-name"));
+        Objective objective = scoreboard.registerNewObjective("Test", "dummy", title );
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
         List<String> scoreboardText = plugin.getConfig().getStringList("scoreboard-text");
-        for (int i = 0; i < scoreboardText.size(); i++) {
+        for (int i = 0; i <= scoreboardText.size() - 1; i++) {
             String text = scoreboardText.get(i)
-                    .replace("{player}", player.getDisplayName())
+                    .replace("{player}", p.getDisplayName())
                     .replace("{online}", String.valueOf(Bukkit.getOnlinePlayers().size()));
             Score score = objective.getScore(ChatColor.translateAlternateColorCodes('&', text));
-            score.setScore(i);
+            score.setScore(scoreboardText.size() - i);
+
+            p.setScoreboard(scoreboard);
         }
-        player.setScoreboard(scoreboard);
 
         if (p.hasPlayedBefore()){
             String join = (ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("join-broadcast")));

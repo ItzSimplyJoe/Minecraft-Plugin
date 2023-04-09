@@ -1,14 +1,12 @@
 package me.itzsimplyjoe.firstplugin.Scoreboards;
 
 import me.itzsimplyjoe.firstplugin.Firstplugin;
-import me.itzsimplyjoe.firstplugin.utils.TeleportUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.scoreboard.*;
 
 import java.util.List;
@@ -32,19 +30,20 @@ public class OpenScoreboardCommand implements CommandExecutor {
             }else {
                 ScoreboardManager manager = Bukkit.getScoreboardManager();
                 Scoreboard scoreboard = manager.getNewScoreboard();
-
-                Objective objective = scoreboard.registerNewObjective("Test", "dummy", "Test");
+                String title = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("scoreboard-name"));
+                Objective objective = scoreboard.registerNewObjective("Test", "dummy", title);
                 objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
                 List<String> scoreboardText = plugin.getConfig().getStringList("scoreboard-text");
-                for (int i = 0; i < scoreboardText.size(); i++) {
+                for (int i = 0; i <= scoreboardText.size() - 1; i++) {
                     String text = scoreboardText.get(i)
                             .replace("{player}", p.getDisplayName())
                             .replace("{online}", String.valueOf(Bukkit.getOnlinePlayers().size()));
                     Score score = objective.getScore(ChatColor.translateAlternateColorCodes('&', text));
-                    score.setScore(i);
-                }
+                    score.setScore(scoreboardText.size() - i);
+
                 p.setScoreboard(scoreboard);
+                }
             }
         } else {
             System.out.println("You must be a player to use this command!");
