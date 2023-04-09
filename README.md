@@ -17,6 +17,7 @@
  - /setspawn to set a world spawnpoint
  - /spawn to teleport to this spawnpoint
  - /bangui to open a ban gui
+ - /rtp to teleport to a random location
  
 ## Contribution Guidelines
 If you would like to contribute to this project, please follow these guidelines:

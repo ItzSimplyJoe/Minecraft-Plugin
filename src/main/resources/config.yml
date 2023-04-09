@@ -1,13 +1,24 @@
-## ------------------------- Messages -------------------------
+## ------------------------- Messages ------------------------- ##
 
-error-message-no-permission: "&cYou don't have permission to use this command!"
-error-message-player-not-found: "&cPlayer not found!"
+error-message-no-permission: "§cYou don't have permission to use this command!"
+error-message-player-not-found: "§cPlayer not found!"
+randomtp-success-message: "§aYou have been teleported to a random location!"
+vanish-success-message: "§aYou have been vanished!"
+unvanish-success-message: "§aYou have been unvanished!"
+
+## ------------------------- Spawn Coordinates ------------------------- ##
+
 spawn:
   x: 0
   y: 0
   z: 0
 
-world-border: true #True if limit how far to tp
-border: 200 #How far to tp
+## ------------------------- RTP Settings ------------------------- ##
+#True = Will follow the value set in border as the max distance to tp
+#False = Will teleport the player anywhere within 25,000 blocks
+world-border: true
+
+#How far to tp
+border: 200
 
 

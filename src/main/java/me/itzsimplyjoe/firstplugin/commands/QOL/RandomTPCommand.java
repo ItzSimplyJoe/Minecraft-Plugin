@@ -1,4 +1,4 @@
-package me.itzsimplyjoe.firstplugin.commands;
+package me.itzsimplyjoe.firstplugin.commands.QOL;
 
 import me.itzsimplyjoe.firstplugin.Firstplugin;
 import me.itzsimplyjoe.firstplugin.utils.TeleportUtils;
@@ -29,10 +29,11 @@ public class RandomTPCommand implements CommandExecutor {
                 }else {
                     Player player = (Player) commandSender;
                     player.teleport(TeleportUtils.generateLocation(player));
+                    player.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("randomtp-success-message")));
                 }
             }else {
                 String target = args[0];
-                if (!commandSender.hasPermission("firstplugin.randomtp")) {
+                if (!commandSender.hasPermission("firstplugin.randomtp.others")) {
                     p.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("error-message-no-permission")));
                     return true;
                 } else {
@@ -41,6 +42,8 @@ public class RandomTPCommand implements CommandExecutor {
                         p.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("error-message-player-not-found")));
                     } else {
                         playerName.teleport(TeleportUtils.generateLocation(playerName));
+                        playerName.sendMessage(Objects.requireNonNull(plugin.getConfig().getString("randomtp-success-message")));
+
                     }
                 }
             }
