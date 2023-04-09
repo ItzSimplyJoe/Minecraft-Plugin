@@ -1,6 +1,8 @@
 package me.itzsimplyjoe.firstplugin.Listeners;
 
 import me.itzsimplyjoe.firstplugin.Firstplugin;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,16 +23,28 @@ public class OnJoin implements Listener {
             p.hidePlayer(plugin, plugin.vanishedPlayers.get(i));
         }
         if (p.hasPlayedBefore()){
-            event.setJoinMessage("§7[§a+§7] §f" + p.getDisplayName());
-            p.sendMessage("§7Hello §b" + p.getDisplayName() + "§7Welcome back to our server!");
+            String join = (ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("join-broadcast")));
+            join = join.replace("{player}", p.getDisplayName());
+            event.setJoinMessage(join);
+            if (plugin.getConfig().getBoolean("motd")){
+                for (int i = 0; i < plugin.getConfig().getList("motd-message").size(); i++){
+                    String message = (ChatColor.translateAlternateColorCodes('&' ,plugin.getConfig().getList("motd-message").get(i).toString()));
+                    message = message.replace("{player}", p.getDisplayName());
+                    p.sendMessage(message);
+                }
+            }
         }else{
             Location location = plugin.getConfig().getLocation("spawn");
 
             if (location != null){
                 p.teleport(location);
             }
-            event.setJoinMessage("§b§l" + p.getDisplayName() + "§fhas joined for the first time!");
-            p.sendMessage("§7Hello §b" + p.getDisplayName() + "§7Welcome to our server!");
+            String firstjoin = (ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("first-join-broadcast")));
+            firstjoin = firstjoin.replace("{player}", p.getDisplayName());
+            event.setJoinMessage(firstjoin);
+            String privatejoinmessage = (ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("first-join-message")));
+            privatejoinmessage = privatejoinmessage.replace("{player}", p.getDisplayName());
+            p.sendMessage(privatejoinmessage);
 
         }
 

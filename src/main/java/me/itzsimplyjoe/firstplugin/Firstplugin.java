@@ -30,7 +30,7 @@ public final class Firstplugin extends JavaPlugin {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         getServer().getPluginManager().registerEvents(new OnJoin(this), this);
-        getServer().getPluginManager().registerEvents(new OnLeave(), this);
+        getServer().getPluginManager().registerEvents(new OnLeave(this), this);
         getCommand("c").setExecutor(new CreativeCommand(this));
         getCommand("a").setExecutor(new AdventureCommand(this));
         getCommand("s").setExecutor(new SurvivalCommand(this));

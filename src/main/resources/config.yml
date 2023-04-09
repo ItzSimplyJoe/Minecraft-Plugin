@@ -1,11 +1,29 @@
 ## ------------------------- Messages ------------------------- ##
 
+# You can use either & or § for colors
+# To use player names use {player}
+
 error-message-no-permission: "§cYou don't have permission to use this command!"
 error-message-player-not-found: "§cPlayer not found!"
 randomtp-success-message: "§aYou have been teleported to a random location!"
 vanish-success-message: "§aYou have been vanished!"
 unvanish-success-message: "§aYou have been unvanished!"
+first-join-broadcast: "§a{player} has joined the server for the first time!"
+first-join-message: "§aWelcome to the server!"
+join-broadcast: "§7[§a+§7] §f{player}"
+leave-broadcast: "§7[§c-§7] §f{player}"
 
+## ------------------------- MOTD ------------------------- ##
+
+motd: true
+
+# To use player names use {player}
+
+motd-message:
+  - "§bWelcome to the server &e{player}!"
+  - ""
+  - "§7This is a test server!"
+  - "§7Enjoy your stay!"
 ## ------------------------- Spawn Coordinates ------------------------- ##
 
 spawn:
@@ -14,11 +32,12 @@ spawn:
   z: 0
 
 ## ------------------------- RTP Settings ------------------------- ##
-#True = Will follow the value set in border as the max distance to tp
-#False = Will teleport the player anywhere within 25,000 blocks
+
+# True = Will follow the value set in border as the max distance to tp
+# False = Will teleport the player anywhere within 25,000 blocks
 world-border: true
 
-#How far to tp
+# How far to tp
 border: 200
 
 
