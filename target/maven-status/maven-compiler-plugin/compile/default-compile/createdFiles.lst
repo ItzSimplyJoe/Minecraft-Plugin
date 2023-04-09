@@ -10,5 +10,6 @@ me\itzsimplyjoe\firstplugin\commands\QOL\FeedCommand.class
 me\itzsimplyjoe\firstplugin\commands\QOL\RandomTPCommand.class
 me\itzsimplyjoe\firstplugin\commands\Spawn\SpawnCommand.class
 me\itzsimplyjoe\firstplugin\commands\QOL\GodCommand.class
+me\itzsimplyjoe\firstplugin\Scoreboards\OpenScoreboardCommand.class
 me\itzsimplyjoe\firstplugin\commands\Gamemodes\AdventureCommand.class
 me\itzsimplyjoe\firstplugin\commands\Gamemodes\CreativeCommand.class

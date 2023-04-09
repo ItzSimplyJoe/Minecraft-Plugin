@@ -8,6 +8,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.scoreboard.*;
+
+import java.util.List;
 
 public class OnJoin implements Listener {
     private final Firstplugin plugin;
@@ -22,6 +25,23 @@ public class OnJoin implements Listener {
         for (int i = 0; i < plugin.vanishedPlayers.size(); i++){
             p.hidePlayer(plugin, plugin.vanishedPlayers.get(i));
         }
+        Player player = event.getPlayer();
+        ScoreboardManager manager = Bukkit.getScoreboardManager();
+        Scoreboard scoreboard = manager.getNewScoreboard();
+
+        Objective objective = scoreboard.registerNewObjective("Test", "dummy", "Test");
+        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+
+        List<String> scoreboardText = plugin.getConfig().getStringList("scoreboard-text");
+        for (int i = 0; i < scoreboardText.size(); i++) {
+            String text = scoreboardText.get(i)
+                    .replace("{player}", player.getDisplayName())
+                    .replace("{online}", String.valueOf(Bukkit.getOnlinePlayers().size()));
+            Score score = objective.getScore(ChatColor.translateAlternateColorCodes('&', text));
+            score.setScore(i);
+        }
+        player.setScoreboard(scoreboard);
+
         if (p.hasPlayedBefore()){
             String join = (ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("join-broadcast")));
             join = join.replace("{player}", p.getDisplayName());

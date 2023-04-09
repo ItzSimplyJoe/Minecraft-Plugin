@@ -74,3 +74,11 @@ commands:
       - invisible
       - sv
       - v
+  sb:
+    description: opens a scoreboard gui
+    usage: /<command>
+    aliases:
+      - scoreboard
+      - scoreboardmenu
+      - scoreboardui
+      - scoreboards
