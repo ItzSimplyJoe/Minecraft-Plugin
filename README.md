@@ -13,6 +13,10 @@
  - /a for adventure
  - /sp for spectator
  - /feed to feed yourself to full hunger
+ - /god to be invincible
+ - /setspawn to set a world spawnpoint
+ - /spawn to teleport to this spawnpoint
+ - /bangui to open a ban gui
  
 ## Contribution Guidelines
 If you would like to contribute to this project, please follow these guidelines:
