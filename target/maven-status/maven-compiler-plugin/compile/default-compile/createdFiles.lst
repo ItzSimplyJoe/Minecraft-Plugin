@@ -1,4 +1,5 @@
 me\itzsimplyjoe\firstplugin\utils\TeleportUtils.class
+me\itzsimplyjoe\firstplugin\commands\Staff\BanGUI.class
 me\itzsimplyjoe\firstplugin\commands\Gamemodes\SpectatorCommand.class
 me\itzsimplyjoe\firstplugin\commands\Staff\VanishCommand.class
 me\itzsimplyjoe\firstplugin\commands\Spawn\SetSpawnCommand.class
@@ -11,5 +12,7 @@ me\itzsimplyjoe\firstplugin\commands\QOL\RandomTPCommand.class
 me\itzsimplyjoe\firstplugin\commands\Spawn\SpawnCommand.class
 me\itzsimplyjoe\firstplugin\commands\QOL\GodCommand.class
 me\itzsimplyjoe\firstplugin\Scoreboards\OpenScoreboardCommand.class
+me\itzsimplyjoe\firstplugin\commands\Staff\unbanCommand.class
+me\itzsimplyjoe\firstplugin\utils\BanUtils.class
 me\itzsimplyjoe\firstplugin\commands\Gamemodes\AdventureCommand.class
 me\itzsimplyjoe\firstplugin\commands\Gamemodes\CreativeCommand.class
