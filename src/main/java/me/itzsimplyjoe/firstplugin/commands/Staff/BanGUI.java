@@ -87,7 +87,7 @@ public class BanGUI implements CommandExecutor, Listener {
 
         List<String> lore = event.getCurrentItem().getItemMeta().getLore();
         String lengthLine = lore.get(0);
-        int lengthinsec = Integer.parseInt(lengthLine.replaceAll("[^0-9]", ""));
+        int lengthinsec = Integer.parseInt(lengthLine);
         String reason = event.getCurrentItem().getItemMeta().getDisplayName();
         BanUtils.banPlayer(playerBeingPunished, reason, lengthinsec);
         event.getWhoClicked().closeInventory();
