@@ -2,6 +2,7 @@
 
 # You can use either & or § for colors
 # To use player names use {player}
+# To use command use {command}
 
 error-message-no-permission: "§cYou don't have permission to use this command!"
 error-message-player-not-found: "§cPlayer not found!"
@@ -12,6 +13,10 @@ first-join-broadcast: "§a{player} has joined the server for the first time!"
 first-join-message: "§aWelcome to the server!"
 join-broadcast: "§7[§a+§7] §f{player}"
 leave-broadcast: "§7[§c-§7] §f{player}"
+unban-command: "§a{player} has been unbanned!"
+player-not-banned: "§c{player} is not banned!"
+error-message-no-args: "§cUsage {command}!"
+
 
 ## ------------------------- MOTD ------------------------- ##
 
@@ -49,5 +54,21 @@ world-border: true
 
 # How far to tp
 border: 200
+
+## ------------------------- Ban GUI ------------------------- ##
+GUI:
+  name: "§b§lBan GUI" # This will have player name afterwards
+  size: 27
+  items:
+    1:
+      reason: "§c§lRacism"
+      material: "REDSTONE_BLOCK"
+      slot: 0
+      length-of-ban: "14D"
+    2:
+      reason: "§c§lBullying"
+      material: "REDSTONE_BLOCK"
+      slot: 1
+      length-of-ban: "86D"
 
 

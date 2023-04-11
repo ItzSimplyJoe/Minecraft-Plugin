@@ -82,3 +82,20 @@ commands:
       - scoreboardmenu
       - scoreboardui
       - scoreboards
+  punish:
+    description: opens a punishment gui
+    usage: /<command>
+    aliases:
+      - punishmenu
+      - punishui
+      - punish
+      - punishes
+      - ban
+      - banmenu
+  unban:
+    description: unbans a player
+    usage: /<command>
+    aliases:
+      - pardon
+      - pardonplayer
+      - unbanplayer

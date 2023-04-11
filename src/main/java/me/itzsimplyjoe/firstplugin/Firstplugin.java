@@ -12,7 +12,9 @@ import me.itzsimplyjoe.firstplugin.commands.QOL.GodCommand;
 import me.itzsimplyjoe.firstplugin.commands.QOL.RandomTPCommand;
 import me.itzsimplyjoe.firstplugin.commands.Spawn.SetSpawnCommand;
 import me.itzsimplyjoe.firstplugin.commands.Spawn.SpawnCommand;
+import me.itzsimplyjoe.firstplugin.commands.Staff.BanGUI;
 import me.itzsimplyjoe.firstplugin.commands.Staff.VanishCommand;
+import me.itzsimplyjoe.firstplugin.commands.Staff.unbanCommand;
 import me.itzsimplyjoe.firstplugin.utils.TeleportUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -43,6 +45,8 @@ public final class Firstplugin extends JavaPlugin {
         getCommand("rtp").setExecutor(new RandomTPCommand(this));
         getCommand("vanish").setExecutor(new VanishCommand(this));
         getCommand("sb").setExecutor(new OpenScoreboardCommand(this));
+        getCommand("punish").setExecutor(new BanGUI(this));
+        getCommand("unban").setExecutor(new unbanCommand(this));
         TeleportUtils utils = new TeleportUtils(this);
     }
 
