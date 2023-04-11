@@ -18,10 +18,6 @@
  - /spawn to teleport to this spawnpoint
  - /bangui to open a ban gui
  - /rtp to teleport to a random location
- - /vanish to vanish from other players
- - MOTD
- - /punish to open a punishment gui
- - /unban to unban a player
  
 ## Contribution Guidelines
 If you would like to contribute to this project, please follow these guidelines:
