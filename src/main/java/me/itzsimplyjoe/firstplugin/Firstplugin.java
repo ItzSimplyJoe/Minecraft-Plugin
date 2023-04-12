@@ -16,6 +16,8 @@ import me.itzsimplyjoe.firstplugin.commands.Staff.*;
 import me.itzsimplyjoe.firstplugin.utils.BanUtils;
 import me.itzsimplyjoe.firstplugin.utils.TeleportUtils;
 import org.bukkit.BanEntry;
+import org.bukkit.BanList;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -58,8 +60,7 @@ public final class Firstplugin extends JavaPlugin {
     @EventHandler
     public void onPlayerLogin(PlayerLoginEvent event) {
         Player player = event.getPlayer();
-        BanEntry banEntry = event.getPlayer().getBanEntry();
-
+        BanEntry banEntry = Bukkit.getBanList(BanList.Type.NAME).getBanEntry(player.getName());
         if (banEntry != null) {
             String banMessage = ChatColor.translateAlternateColorCodes('&', getConfig().getString("ban-message").replace("{player}", player.getName()).replace("{reason}", banEntry.getReason()).replace("{time}", banEntry.getExpiration().toString()));
             event.setKickMessage(banMessage);

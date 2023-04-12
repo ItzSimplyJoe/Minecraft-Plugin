@@ -17,13 +17,13 @@ public class kickCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if (commandSender.hasPermission("firstplugin.kick")){
             if (args.length == 0){
-                commandSender.sendMessage("You need to specify a player to kick!");
+                commandSender.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("error-message-no-player-for-kick").replace("{command}", "/kick <player> <reason>")));
             }else if(args.length == 1){
-                commandSender.sendMessage("You need to specify a reason to kick!");
+                commandSender.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("error-message-no-reason-for-kick").replace("{command}", "/kick <player> <reason>")));
             }else if(args.length >= 2){
                 Player target = commandSender.getServer().getPlayer(args[0]);
                 if (target.equals(commandSender.getName())){
-                    commandSender.sendMessage("You can't kick yourself!");
+                    commandSender.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("error-message-kick-yourself").replace("{command}", "/kick <player> <reason>")));
                     return true;
                 }else {
                     StringBuilder reason = new StringBuilder();

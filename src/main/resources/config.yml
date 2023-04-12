@@ -22,6 +22,9 @@ error-message-no-player-for-ban: "&cIncorrect usage {command}"
 error-message-ban-yourself: "§cYou can't ban yourself!"
 error-message-no-reason-for-ban: "&cIncorrect usage {command}"
 error-message-no-time-for-ban: "&cIncorrect usage {command}"
+error-message-no-player-for-kick: "&cIncorrect usage {command}"
+error-message-kick-yourself: "§cYou can't kick yourself!"
+error-message-no-reason-for-kick: "&cIncorrect usage {command}"
 
 
 

@@ -3,6 +3,7 @@ package me.itzsimplyjoe.firstplugin.commands.Staff;
 import me.itzsimplyjoe.firstplugin.Firstplugin;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,7 +20,7 @@ public class unbanCommand implements CommandExecutor {
         if (args.length == 0) {
             String message = plugin.getConfig().getString("error-message-no-args");
             message = message.replace("{command}", "/unban");
-            commandSender.sendMessage(message);
+            commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
             return true;
         }
         if (commandSender.hasPermission("firstplugin.unban")) {
@@ -27,14 +28,14 @@ public class unbanCommand implements CommandExecutor {
                 Bukkit.getServer().getBanList(BanList.Type.NAME).pardon(args[0]);
                 String message = plugin.getConfig().getString("unban-message");
                 message = message.replace("{player}", args[0]);
-                commandSender.sendMessage(message);
+                commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
             } else {
                 String message = plugin.getConfig().getString("player-not-banned");
                 message = message.replace("{player}", args[0]);
-                commandSender.sendMessage(message);
+                commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
             }
         } else {
-            commandSender.sendMessage(plugin.getConfig().getString("error-message-no-permission"));
+            commandSender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("error-message-no-permission")));
         }
         return true;
     }
