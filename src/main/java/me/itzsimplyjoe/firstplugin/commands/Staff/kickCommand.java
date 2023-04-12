@@ -15,29 +15,40 @@ public class kickCommand implements CommandExecutor {
     }
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
-        if (commandSender.hasPermission("firstplugin.kick")){
-            if (args.length == 0){
-                commandSender.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("error-message-no-player-for-kick").replace("{command}", "/kick <player> <reason>")));
-            }else if(args.length == 1){
-                commandSender.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("error-message-no-reason-for-kick").replace("{command}", "/kick <player> <reason>")));
-            }else if(args.length >= 2){
-                Player target = commandSender.getServer().getPlayer(args[0]);
-                if (target.equals(commandSender.getName())){
-                    commandSender.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("error-message-kick-yourself").replace("{command}", "/kick <player> <reason>")));
-                    return true;
-                }else {
-                    StringBuilder reason = new StringBuilder();
-                    for (int i = 1; i < args.length; i++) {
-                        reason.append(args[i]).append(" ");
+        if (commandSender instanceof Player) {
+            if (commandSender.hasPermission("firstplugin.kick")) {
+                if (args.length == 0) {
+                    commandSender.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("error-message-no-player-for-kick").replace("{command}", "/kick <player> <reason>")));
+                } else if (args.length == 1) {
+                    commandSender.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("error-message-no-reason-for-kick").replace("{command}", "/kick <player> <reason>")));
+                } else if (args.length >= 2) {
+                    Player target = commandSender.getServer().getPlayer(args[0]);
+                    if (target.equals(commandSender.getName())) {
+                        commandSender.sendMessage(org.bukkit.ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("error-message-kick-yourself").replace("{command}", "/kick <player> <reason>")));
+                        return true;
+                    } else {
+                        StringBuilder reason = new StringBuilder();
+                        for (int i = 1; i < args.length; i++) {
+                            reason.append(args[i]).append(" ");
+                        }
+                        ((Player) target).kickPlayer(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("kick-message").replace("{player}", commandSender.getName()).replace("{reason}", reason.toString())));
                     }
-                    ((Player) target).kickPlayer(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("kick-message").replace("{player}", commandSender.getName()).replace("{reason}", reason.toString())));
                 }
             }
+        }else{
+            if (args.length == 0) {
+                System.out.println((ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("error-message-no-player-for-kick").replace("{command}", "/kick <player> <reason>"))));
+            } else if (args.length == 1) {
+                System.out.println((ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("error-message-no-reason-for-kick").replace("{command}", "/kick <player> <reason>"))));
+            } else if (args.length >= 2) {
+                Player target = Bukkit.getServer().getPlayer(args[0]);
+                StringBuilder reason = new StringBuilder();
+                for (int i = 1; i < args.length; i++) {
+                    reason.append(args[i]).append(" ");
+                }
+                ((Player) target).kickPlayer(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("kick-message").replace("{player}", commandSender.getName()).replace("{reason}", reason.toString())));
+            }
         }
-
-
-
-
         return true;
     }
 }

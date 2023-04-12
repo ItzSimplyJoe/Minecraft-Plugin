@@ -54,6 +54,7 @@ public final class Firstplugin extends JavaPlugin {
         getCommand("unban").setExecutor(new unbanCommand(this));
         getCommand("ban").setExecutor(new BanCommand(this));
         getCommand("tempban").setExecutor(new tempbanCommand(this));
+        getCommand("kick").setExecutor(new kickCommand(this));
         TeleportUtils utils = new TeleportUtils(this);
         new BanUtils(plugin);
     }
