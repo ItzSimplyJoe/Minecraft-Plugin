@@ -77,12 +77,13 @@ public class BanUtils {
                         Player player = (Player) event.getWhoClicked();
                         String newName = resultMeta.getDisplayName();
                         if (reasoncheck==null){
+                            player.closeInventory();
                             openAnvilGUI(player, newName, "Enter a length of time");
                         }else{
+                            player.closeInventory();
                             int length = getLength(newName);
                             banPlayer(player, reasoncheck, length);
                         }
-                        player.closeInventory();
                     }
                 }
             }
