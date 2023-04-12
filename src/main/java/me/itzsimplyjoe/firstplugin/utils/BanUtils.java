@@ -3,29 +3,20 @@ package me.itzsimplyjoe.firstplugin.utils;
 import me.itzsimplyjoe.firstplugin.Firstplugin;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.AnvilInventory;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.event.Listener;
+
 
 import java.util.Date;
 import java.util.Locale;
 
-public class BanUtils {
-    private final Firstplugin plugin;
-
+public class BanUtils implements Listener {
+    private static Firstplugin plugin = null;
     public BanUtils(Firstplugin plugin) {
         this.plugin = plugin;
+        Bukkit.getPluginManager().registerEvents(this, plugin);
     }
-    private static Inventory anvilInventory;
-    private static String reasoncheck;
-    private static ItemStack paper;
+
     public static int getLength(String length) {
         length = length.toLowerCase(Locale.ROOT);
         if (length.contains("perm")) {
@@ -50,51 +41,9 @@ public class BanUtils {
         } else {
             long expires = System.currentTimeMillis() + (length * 1000L);
             Bukkit.getServer().getBanList(BanList.Type.NAME).addBan(player.getName(), reason, new Date(expires), null);
-            player.kickPlayer(reason);
+            player.kickPlayer(plugin.getConfig().getString("ban-message").replace("{player}", player.getName()).replace("{reason}", reason));
+
         }
     }
 
-    public static void openAnvilGUI(Player player, String reasoncheck, String title) {
-        anvilInventory = Bukkit.createInventory(player, InventoryType.ANVIL, title);
-        paper = new ItemStack(Material.PAPER);
-        anvilInventory.setItem(0, paper);
-        player.openInventory(anvilInventory);
-    }
-
-    @EventHandler
-    public void onInventoryClick(InventoryClickEvent event) {
-        if (event.getInventory().equals(anvilInventory)) {
-            AnvilInventory anvil = (AnvilInventory) event.getClickedInventory();
-            if (event.getSlotType() == InventoryType.SlotType.RESULT) {
-                ItemStack result = anvil.getItem(2);
-                ItemStack previous = event.getCurrentItem();
-
-                if (result != null && previous != null && result.hasItemMeta() && previous.hasItemMeta()) {
-                    ItemMeta resultMeta = result.getItemMeta();
-                    ItemMeta previousMeta = previous.getItemMeta();
-
-                    if (!resultMeta.getDisplayName().equals(previousMeta.getDisplayName())) {
-                        Player player = (Player) event.getWhoClicked();
-                        String newName = resultMeta.getDisplayName();
-                        if (reasoncheck==null){
-                            player.closeInventory();
-                            openAnvilGUI(player, newName, "Enter a length of time");
-                        }else{
-                            player.closeInventory();
-                            int length = getLength(newName);
-                            banPlayer(player, reasoncheck, length);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    @EventHandler
-    public void onInventoryClose(InventoryCloseEvent event) {
-        if (event.getInventory().equals(anvilInventory)) {
-            Player player = (Player) event.getPlayer();
-            anvilInventory = null;
-            player.getInventory().addItem(paper);
-        }
-    }
 }

@@ -12,11 +12,14 @@ import me.itzsimplyjoe.firstplugin.commands.QOL.GodCommand;
 import me.itzsimplyjoe.firstplugin.commands.QOL.RandomTPCommand;
 import me.itzsimplyjoe.firstplugin.commands.Spawn.SetSpawnCommand;
 import me.itzsimplyjoe.firstplugin.commands.Spawn.SpawnCommand;
-import me.itzsimplyjoe.firstplugin.commands.Staff.BanGUI;
-import me.itzsimplyjoe.firstplugin.commands.Staff.VanishCommand;
-import me.itzsimplyjoe.firstplugin.commands.Staff.unbanCommand;
+import me.itzsimplyjoe.firstplugin.commands.Staff.*;
+import me.itzsimplyjoe.firstplugin.utils.BanUtils;
 import me.itzsimplyjoe.firstplugin.utils.TeleportUtils;
+import org.bukkit.BanEntry;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -47,9 +50,21 @@ public final class Firstplugin extends JavaPlugin {
         getCommand("sb").setExecutor(new OpenScoreboardCommand(this));
         getCommand("punish").setExecutor(new BanGUI(this));
         getCommand("unban").setExecutor(new unbanCommand(this));
+        getCommand("ban").setExecutor(new BanCommand(this));
+        getCommand("tempban").setExecutor(new tempbanCommand(this));
         TeleportUtils utils = new TeleportUtils(this);
+        new BanUtils(plugin);
     }
+    @EventHandler
+    public void onPlayerLogin(PlayerLoginEvent event) {
+        Player player = event.getPlayer();
+        BanEntry banEntry = event.getPlayer().getBanEntry();
 
+        if (banEntry != null) {
+            String banMessage = ChatColor.translateAlternateColorCodes('&', getConfig().getString("ban-message").replace("{player}", player.getName()).replace("{reason}", banEntry.getReason()).replace("{time}", banEntry.getExpiration().toString()));
+            event.setKickMessage(banMessage);
+        }
+    }
     @Override
     public void onDisable() {
         System.out.println("Joe's Plugin has stopped successfully hopefully!");

@@ -24,6 +24,7 @@ public class BanGUI implements CommandExecutor, Listener {
 
     public BanGUI(Firstplugin plugin) {
         this.plugin = plugin;
+        Bukkit.getPluginManager().registerEvents((Listener) new BanUtils(plugin), plugin);
     }
 
     @Override
@@ -52,10 +53,10 @@ public class BanGUI implements CommandExecutor, Listener {
             return true;
         }
 
-//        if (((Player) sender).getUniqueId().equals(playerBeingPunished.getUniqueId())) {
-//            sender.sendMessage("You cannot ban yourself.");
-//            return true;
-//        }
+        if (((Player) sender).getUniqueId().equals(playerBeingPunished.getUniqueId())) {
+            sender.sendMessage("You cannot ban yourself.");
+            return true;
+        }
 
         Inventory inventory = Bukkit.createInventory(null, plugin.getConfig().getInt("GUI.size"), plugin.getConfig().getString("GUI.name") + playerBeingPunished.getName());
         for (String key : plugin.getConfig().getConfigurationSection("GUI.items").getKeys(false)) {
@@ -71,11 +72,6 @@ public class BanGUI implements CommandExecutor, Listener {
         meta.setDisplayName("Cancel");
         item.setItemMeta(meta);
         inventory.setItem(plugin.getConfig().getInt("GUI.cancel.slot"), item);
-        ItemStack item2 = new ItemStack(Material.getMaterial(plugin.getConfig().getString("GUI.custom-ban.material")));
-        ItemMeta meta2 = item2.getItemMeta();
-        meta2.setDisplayName("Custom Ban");
-        item2.setItemMeta(meta2);
-        inventory.setItem(plugin.getConfig().getInt("GUI.custom-ban.slot"), item2);
         Bukkit.getPluginManager().registerEvents(this, plugin);
         ((Player) sender).openInventory(inventory);
 
@@ -95,11 +91,6 @@ public class BanGUI implements CommandExecutor, Listener {
         }
         if (event.getCurrentItem().getItemMeta().getDisplayName().equals("Cancel")) {
             event.getWhoClicked().closeInventory();
-            return;
-        }
-        if (event.getCurrentItem().getItemMeta().getDisplayName().equals("Custom Ban")) {
-            event.getWhoClicked().closeInventory();
-            BanUtils.openAnvilGUI((Player) event.getWhoClicked(),null, "Enter custom ban reason:");
             return;
         }
 

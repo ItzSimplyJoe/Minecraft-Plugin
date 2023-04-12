@@ -16,7 +16,13 @@ leave-broadcast: "§7[§c-§7] §f{player}"
 unban-message: "§a{player} has been unbanned!"
 player-not-banned: "§c{player} is not banned!"
 error-message-no-args: "§cUsage {command}!"
-error-message-no-input-provided-in-anvil: "§cYou must provide an input!"
+ban-broadcast: "§c{player} has been banned for {reason}!"
+kick-message: "§cYou have been kicked for {reason}!"
+error-message-no-player-for-ban: "&cIncorrect usage {command}"
+error-message-ban-yourself: "§cYou can't ban yourself!"
+error-message-no-reason-for-ban: "&cIncorrect usage {command}"
+error-message-no-time-for-ban: "&cIncorrect usage {command}"
+
 
 
 ## ------------------------- MOTD ------------------------- ##
@@ -63,9 +69,6 @@ GUI:
   cancel:
     material: "BARRIER"
     slot: 26
-  custom-ban:
-    material: "ANVIL"
-    slot: 25
   items:
     1:
       reason: "§c§lRacism"
@@ -80,10 +83,5 @@ GUI:
 
 
 ## ------------------------- Ban Screen ------------------------- ##
-BanMessage:
-  - "§cYou have been banned!"
-  - "§cReason: {reason}"
-  - "§cLength of ban: {length}"
-  - "§cAppeal at: https://itzsimplyjoe.me"
-  - "§cIf you believe this is a mistake, contact an admin."
+BanMessage: "§cYou have been banned! \n§cReason: {reason} \n§cLength of ban: {length}\n §cAppeal at: https://itzsimplyjoe.me \n§cIf you believe this is a mistake, contact an admin."
 
