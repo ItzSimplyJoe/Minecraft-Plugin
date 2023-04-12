@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -53,7 +54,7 @@ public class BanUtils {
     }
 
     public static void openAnvilGUI(Player player, String reasoncheck, String title) {
-        anvilInventory = Bukkit.createInventory(player, 3, title);
+        anvilInventory = Bukkit.createInventory(player, InventoryType.ANVIL, title);
         paper = new ItemStack(Material.PAPER);
         anvilInventory.setItem(0, paper);
         player.openInventory(anvilInventory);
