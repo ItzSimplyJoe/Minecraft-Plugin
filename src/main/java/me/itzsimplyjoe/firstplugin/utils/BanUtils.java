@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -61,31 +62,31 @@ public class BanUtils {
     }
 
     @EventHandler
-    public String onInventoryClick(InventoryClickEvent event) {
+    public void onInventoryClick(InventoryClickEvent event) {
         if (event.getInventory().equals(anvilInventory)) {
-            event.setCancelled(true);
-            Player player = (Player) event.getWhoClicked();
-            ItemStack clickedItem = event.getCurrentItem();
+            AnvilInventory anvil = (AnvilInventory) event.getClickedInventory();
+            if (event.getSlotType() == InventoryType.SlotType.RESULT) {
+                ItemStack result = anvil.getItem(2);
+                ItemStack previous = event.getCurrentItem();
 
-            if (clickedItem != null && clickedItem.getType() == Material.PAPER) {
-                ItemMeta meta = clickedItem.getItemMeta();
+                if (result != null && previous != null && result.hasItemMeta() && previous.hasItemMeta()) {
+                    ItemMeta resultMeta = result.getItemMeta();
+                    ItemMeta previousMeta = previous.getItemMeta();
 
-                if (meta.hasDisplayName()) {
-                    String newName = meta.getDisplayName();
-                    if (reasoncheck==null){
-                        openAnvilGUI(player, newName, "Enter a length of time");
-                    }else{
-                        int length = getLength(newName);
-                        banPlayer(player, reasoncheck, length);
+                    if (!resultMeta.getDisplayName().equals(previousMeta.getDisplayName())) {
+                        Player player = (Player) event.getWhoClicked();
+                        String newName = resultMeta.getDisplayName();
+                        if (reasoncheck==null){
+                            openAnvilGUI(player, newName, "Enter a length of time");
+                        }else{
+                            int length = getLength(newName);
+                            banPlayer(player, reasoncheck, length);
+                        }
+                        player.closeInventory();
                     }
-                    player.closeInventory();
-
-                } else {
-                    player.sendMessage(plugin.getConfig().getString("error-message-no-input-provided-in-anvil"));
                 }
             }
         }
-        return null;
     }
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent event) {

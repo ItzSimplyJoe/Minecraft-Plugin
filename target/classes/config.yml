@@ -60,6 +60,12 @@ border: 200
 GUI:
   name: "§b§lBan GUI" # This will have player name afterwards
   size: 27
+  cancel:
+    material: "BARRIER"
+    slot: 26
+  custom-ban:
+    material: "ANVIL"
+    slot: 25
   items:
     1:
       reason: "§c§lRacism"
@@ -72,12 +78,6 @@ GUI:
       slot: 1
       length-of-ban: "86D"
 
-  cancel:
-    material: "BARRIER"
-    slot: 26
-  custom-ban:
-    material: "ANVIL"
-    slot: 25
 
 ## ------------------------- Ban Screen ------------------------- ##
 BanMessage:
