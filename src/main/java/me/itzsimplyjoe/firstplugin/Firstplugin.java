@@ -54,6 +54,7 @@ public final class Firstplugin extends JavaPlugin {
     public void onDisable() {
         System.out.println("Joe's Plugin has stopped successfully hopefully!");
     }
+
     public static Firstplugin getPlugin(){
         return plugin;
     }

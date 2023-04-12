@@ -8,11 +8,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 public class unbanCommand implements CommandExecutor {
-    static Firstplugin plugin;
+    private final Firstplugin plugin;
 
-    public unbanCommand(Firstplugin plugin){
+    public unbanCommand(Firstplugin plugin) {
         this.plugin = plugin;
     }
+
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         if (args.length == 0) {
@@ -34,7 +35,6 @@ public class unbanCommand implements CommandExecutor {
             }
         } else {
             commandSender.sendMessage(plugin.getConfig().getString("error-message-no-permission"));
-
         }
         return true;
     }

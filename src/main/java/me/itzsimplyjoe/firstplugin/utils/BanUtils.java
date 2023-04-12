@@ -1,13 +1,29 @@
 package me.itzsimplyjoe.firstplugin.utils;
 
+import me.itzsimplyjoe.firstplugin.Firstplugin;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Date;
 import java.util.Locale;
 
 public class BanUtils {
+    private final Firstplugin plugin;
+
+    public BanUtils(Firstplugin plugin) {
+        this.plugin = plugin;
+    }
+    private static Inventory anvilInventory;
+    private static String reasoncheck;
+    private static ItemStack paper;
     public static int getLength(String length) {
         length = length.toLowerCase(Locale.ROOT);
         if (length.contains("perm")) {
@@ -36,4 +52,46 @@ public class BanUtils {
         }
     }
 
+    public static void openAnvilGUI(Player player, String reasoncheck, String title) {
+        anvilInventory = Bukkit.createInventory(player, 3, title);
+        paper = new ItemStack(Material.PAPER);
+        anvilInventory.setItem(0, paper);
+        player.openInventory(anvilInventory);
+    }
+
+    @EventHandler
+    public String onInventoryClick(InventoryClickEvent event) {
+        if (event.getInventory().equals(anvilInventory)) {
+            event.setCancelled(true);
+            Player player = (Player) event.getWhoClicked();
+            ItemStack clickedItem = event.getCurrentItem();
+
+            if (clickedItem != null && clickedItem.getType() == Material.PAPER) {
+                ItemMeta meta = clickedItem.getItemMeta();
+
+                if (meta.hasDisplayName()) {
+                    String newName = meta.getDisplayName();
+                    if (reasoncheck==null){
+                        openAnvilGUI(player, newName, "Enter a length of time");
+                    }else{
+                        int length = getLength(newName);
+                        banPlayer(player, reasoncheck, length);
+                    }
+                    player.closeInventory();
+
+                } else {
+                    player.sendMessage(plugin.getConfig().getString("error-message-no-input-provided-in-anvil"));
+                }
+            }
+        }
+        return null;
+    }
+    @EventHandler
+    public void onInventoryClose(InventoryCloseEvent event) {
+        if (event.getInventory().equals(anvilInventory)) {
+            Player player = (Player) event.getPlayer();
+            anvilInventory = null;
+            player.getInventory().addItem(paper);
+        }
+    }
 }

@@ -13,9 +13,10 @@ first-join-broadcast: "§a{player} has joined the server for the first time!"
 first-join-message: "§aWelcome to the server!"
 join-broadcast: "§7[§a+§7] §f{player}"
 leave-broadcast: "§7[§c-§7] §f{player}"
-unban-command: "§a{player} has been unbanned!"
+unban-message: "§a{player} has been unbanned!"
 player-not-banned: "§c{player} is not banned!"
 error-message-no-args: "§cUsage {command}!"
+error-message-no-input-provided-in-anvil: "§cYou must provide an input!"
 
 
 ## ------------------------- MOTD ------------------------- ##
@@ -71,4 +72,18 @@ GUI:
       slot: 1
       length-of-ban: "86D"
 
+  cancel:
+    material: "BARRIER"
+    slot: 26
+  custom-ban:
+    material: "ANVIL"
+    slot: 25
+
+## ------------------------- Ban Screen ------------------------- ##
+BanMessage:
+  - "§cYou have been banned!"
+  - "§cReason: {reason}"
+  - "§cLength of ban: {length}"
+  - "§cAppeal at: https://itzsimplyjoe.me"
+  - "§cIf you believe this is a mistake, contact an admin."
 

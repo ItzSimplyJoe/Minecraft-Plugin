@@ -66,7 +66,16 @@ public class BanGUI implements CommandExecutor, Listener {
             item.setItemMeta(meta);
             inventory.setItem(plugin.getConfig().getInt("GUI.items." + key + ".slot"), item);
         }
-
+        ItemStack item = new ItemStack(Material.getMaterial(plugin.getConfig().getString("GUI.cancel.material")));
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName("Cancel");
+        item.setItemMeta(meta);
+        inventory.setItem(plugin.getConfig().getInt("GUI.cancel.slot"), item);
+        ItemStack item2 = new ItemStack(Material.getMaterial(plugin.getConfig().getString("GUI.custom-ban.material")));
+        ItemMeta meta2 = item2.getItemMeta();
+        meta2.setDisplayName("Custom Ban");
+        item2.setItemMeta(meta2);
+        inventory.setItem(plugin.getConfig().getInt("GUI.custom-ban.slot"), item2);
         Bukkit.getPluginManager().registerEvents(this, plugin);
         ((Player) sender).openInventory(inventory);
 
@@ -82,6 +91,15 @@ public class BanGUI implements CommandExecutor, Listener {
         event.setCancelled(true);
 
         if (event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR) {
+            return;
+        }
+        if (event.getCurrentItem().getItemMeta().getDisplayName().equals("Cancel")) {
+            event.getWhoClicked().closeInventory();
+            return;
+        }
+        if (event.getCurrentItem().getItemMeta().getDisplayName().equals("Custom Ban")) {
+            event.getWhoClicked().closeInventory();
+            BanUtils.openAnvilGUI((Player) event.getWhoClicked(),null, "Enter custom ban reason:");
             return;
         }
 
