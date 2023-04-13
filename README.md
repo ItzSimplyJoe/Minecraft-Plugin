@@ -16,8 +16,10 @@
  - /god to be invincible
  - /setspawn to set a world spawnpoint
  - /spawn to teleport to this spawnpoint
- - /punish to open a ban gui
- - /unban to unban a player
+ - /punish <player> to open a ban gui
+ - /ban <player> <reason> to ban a player
+ - /tempban <player> <time> <reason> to tempban a player
+ - /unban <player> to unban a player
  - MOTD (Message of the day)
  - /vanish to vanish from other players
  - /rtp to teleport to a random location

@@ -63,7 +63,7 @@ public final class Firstplugin extends JavaPlugin {
         Player player = event.getPlayer();
         BanEntry banEntry = Bukkit.getBanList(BanList.Type.NAME).getBanEntry(player.getName());
         if (banEntry != null) {
-            String banMessage = ChatColor.translateAlternateColorCodes('&', getConfig().getString("ban-message").replace("{player}", player.getName()).replace("{reason}", banEntry.getReason()).replace("{time}", banEntry.getExpiration().toString()));
+            String banMessage = ChatColor.translateAlternateColorCodes('&', getConfig().getString("BanMessage").replace("{player}", player.getName()).replace("{reason}", banEntry.getReason()).replace("{time}", banEntry.getExpiration().toString()));
             event.setKickMessage(banMessage);
         }
     }
