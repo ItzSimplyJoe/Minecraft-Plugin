@@ -1,5 +1,6 @@
 package me.itzsimplyjoe.firstplugin;
 
+import me.itzsimplyjoe.firstplugin.Listeners.MuteListener;
 import me.itzsimplyjoe.firstplugin.Listeners.OnJoin;
 import me.itzsimplyjoe.firstplugin.Listeners.OnLeave;
 import me.itzsimplyjoe.firstplugin.Scoreboards.OpenScoreboardCommand;
@@ -14,6 +15,7 @@ import me.itzsimplyjoe.firstplugin.commands.Spawn.SetSpawnCommand;
 import me.itzsimplyjoe.firstplugin.commands.Spawn.SpawnCommand;
 import me.itzsimplyjoe.firstplugin.commands.Staff.*;
 import me.itzsimplyjoe.firstplugin.utils.BanUtils;
+import me.itzsimplyjoe.firstplugin.utils.MuteUtils;
 import me.itzsimplyjoe.firstplugin.utils.TeleportUtils;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
@@ -37,8 +39,10 @@ public final class Firstplugin extends JavaPlugin {
         System.out.println("Joe's Plugin has started successfully hopefully!");
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+        MuteUtils muteUtils = new MuteUtils();
         getServer().getPluginManager().registerEvents(new OnJoin(this), this);
         getServer().getPluginManager().registerEvents(new OnLeave(this), this);
+        getServer().getPluginManager().registerEvents(new MuteListener(muteUtils), this);
         getCommand("c").setExecutor(new CreativeCommand(this));
         getCommand("a").setExecutor(new AdventureCommand(this));
         getCommand("s").setExecutor(new SurvivalCommand(this));
@@ -55,6 +59,7 @@ public final class Firstplugin extends JavaPlugin {
         getCommand("ban").setExecutor(new BanCommand(this));
         getCommand("tempban").setExecutor(new tempbanCommand(this));
         getCommand("kick").setExecutor(new kickCommand(this));
+        getCommand("mute").setExecutor(new MuteCommand(this));
         TeleportUtils utils = new TeleportUtils(this);
         new BanUtils(plugin);
     }

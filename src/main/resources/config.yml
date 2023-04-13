@@ -3,6 +3,7 @@
 # You can use either & or § for colors
 # To use player names use {player}
 # To use command use {command}
+# To use reason use {reason}
 
 error-message-no-permission: "§cYou don't have permission to use this command!"
 error-message-player-not-found: "§cPlayer not found!"
@@ -25,6 +26,11 @@ error-message-no-time-for-ban: "&cIncorrect usage {command}"
 error-message-no-player-for-kick: "&cIncorrect usage {command}"
 error-message-kick-yourself: "§cYou can't kick yourself!"
 error-message-no-reason-for-kick: "&cIncorrect usage {command}"
+error-message-no-player-for-mute: "&cIncorrect usage {command}"
+error-message-no-reason-for-mute: "&cIncorrect usage {command}"
+player-muted-message: "§cYou have muted {player}"
+muted-message: "&cYou've been muted by {player} for {reason}"
+player-is-muted: "§cYou are muted and cannot speak!"
 
 
 

@@ -105,3 +105,8 @@ commands:
     usage: /<command>
     aliases:
       - kickplayer
+  mute:
+    description: mutes a player
+    usage: /<command>
+    aliases:
+      - muteplayer
