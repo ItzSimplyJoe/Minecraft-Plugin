@@ -1,6 +1,7 @@
 package me.itzsimplyjoe.firstplugin.utils;
 
 import me.itzsimplyjoe.firstplugin.Firstplugin;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -44,6 +45,10 @@ public class BanUtils implements Listener {
             player.kickPlayer(plugin.getConfig().getString("ban-message").replace("{player}", player.getName()).replace("{reason}", reason));
 
         }
+    }
+    public static void kickPlayer(Player player, String reason) {
+        player.kickPlayer(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("kick-message").replace("{reason}", reason.toString())));
+
     }
 
 }

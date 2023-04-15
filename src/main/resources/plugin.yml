@@ -110,3 +110,13 @@ commands:
     usage: /<command>
     aliases:
       - muteplayer
+  unmute:
+    description: unmutes a player
+    usage: /<command>
+    aliases:
+      - unmuteplayer
+  tempmute:
+    description: tempmutes a player
+    usage: /<command>
+    aliases:
+      - tempmuteplayer

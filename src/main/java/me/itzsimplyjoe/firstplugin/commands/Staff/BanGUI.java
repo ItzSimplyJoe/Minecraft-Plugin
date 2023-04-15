@@ -2,6 +2,7 @@ package me.itzsimplyjoe.firstplugin.commands.Staff;
 
 import me.itzsimplyjoe.firstplugin.utils.BanUtils;
 import me.itzsimplyjoe.firstplugin.Firstplugin;
+import me.itzsimplyjoe.firstplugin.utils.MuteUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -15,15 +16,17 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BanGUI implements CommandExecutor, Listener {
     private final Firstplugin plugin;
     private Player playerBeingPunished;
+    private MuteUtils config;
 
     public BanGUI(Firstplugin plugin) {
         this.plugin = plugin;
+        this.config = config;
         Bukkit.getPluginManager().registerEvents((Listener) new BanUtils(plugin), plugin);
     }
 
@@ -62,7 +65,10 @@ public class BanGUI implements CommandExecutor, Listener {
         for (String key : plugin.getConfig().getConfigurationSection("GUI.items").getKeys(false)) {
             ItemStack item = new ItemStack(Material.getMaterial(plugin.getConfig().getString("GUI.items." + key + ".material")));
             ItemMeta meta = item.getItemMeta();
-            meta.setLore(Arrays.asList(plugin.getConfig().getString("GUI.items." + key + ".length-of-ban")));
+            List<String> lore = new ArrayList<>();
+            lore.add(plugin.getConfig().getString("GUI.items." + key + ".type"));
+            lore.add(plugin.getConfig().getString("GUI.items." + key + ".length-of-punishment"));
+            meta.setLore(lore);
             meta.setDisplayName(plugin.getConfig().getString("GUI.items." + key + ".reason"));
             item.setItemMeta(meta);
             inventory.setItem(plugin.getConfig().getInt("GUI.items." + key + ".slot"), item);
@@ -95,11 +101,28 @@ public class BanGUI implements CommandExecutor, Listener {
         }
 
         List<String> lore = event.getCurrentItem().getItemMeta().getLore();
-        String lengthLine = lore.get(0);
-        int lengthinsec =  BanUtils.getLength(lengthLine);
-        String reason = event.getCurrentItem().getItemMeta().getDisplayName();
-        BanUtils.banPlayer(playerBeingPunished, reason, lengthinsec);
-        event.getWhoClicked().closeInventory();
+        String type = lore.get(0);
+        String lengthLine = lore.get(1);
+        if (type.equals("ban")) {
+            int lengthinsec = BanUtils.getLength(lengthLine);
+            String reason = event.getCurrentItem().getItemMeta().getDisplayName();
+            BanUtils.banPlayer(playerBeingPunished, reason, lengthinsec);
+            event.getWhoClicked().closeInventory();
+        }else if (type.equals("kick")) {
+            String reason = event.getCurrentItem().getItemMeta().getDisplayName();
+            BanUtils.kickPlayer(playerBeingPunished, reason);
+            event.getWhoClicked().closeInventory();
+        }else if (type.equals("mute")) {
+            String reason = event.getCurrentItem().getItemMeta().getDisplayName();
+            config.mutePlayer(playerBeingPunished);
+            event.getWhoClicked().closeInventory();
+        }else if (type.equals("tempmute")) {
+            int lengthinsec = BanUtils.getLength(lengthLine);
+            lengthinsec = lengthinsec * 1000;
+            String reason = event.getCurrentItem().getItemMeta().getDisplayName();
+            config.tempMutePlayer(playerBeingPunished, lengthinsec);
+            event.getWhoClicked().closeInventory();
+        }
     }
 }
 

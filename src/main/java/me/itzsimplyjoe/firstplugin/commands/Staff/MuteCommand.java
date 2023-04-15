@@ -34,8 +34,12 @@ public class MuteCommand implements CommandExecutor {
                 } else if (args.length >= 2){
                     Player target = player.getServer().getPlayer(args[0]);
                     config.mutePlayer(target);
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("player-muted-message").replace("{command}", "/mute <player> <reason>").replace("{player}", target.getName()).replace("{reason}", args[1])));
-                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("muted-message").replace("{command}", "/mute <player> <reason>").replace("{player}", player.getName()).replace("{reason}", args[1])));
+                    StringBuilder reason = new StringBuilder();
+                    for (int i = 1; i < args.length; i++) {
+                        reason.append(args[i]).append(" ");
+                    }
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("player-muted-message").replace("{command}", "/mute <player> <reason>").replace("{player}", target.getName()).replace("{reason}", reason.toString())));
+                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("muted-message").replace("{command}", "/mute <player> <reason>").replace("{player}", player.getName()).replace("{reason}", reason.toString())));
                 }
             } else {
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("error-message-no-permission").replace("{command}", "/mute <player> <reason>")));
@@ -48,8 +52,12 @@ public class MuteCommand implements CommandExecutor {
             } else if (args.length >= 2) {
                 Player target = Bukkit.getServer().getPlayer(args[0]);
                 config.mutePlayer(target);
-                System.out.println(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("player-muted-message").replace("{command}", "/mute <player> <reason>").replace("{player}", target.getName()).replace("{reason}", args[1])));
-                target.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("muted-message").replace("{command}", "/mute <player> <reason>").replace("{player}", "CONSOLE").replace("{reason}", args[1])));
+                StringBuilder reason = new StringBuilder();
+                for (int i = 2; i < args.length; i++) {
+                    reason.append(args[i]).append(" ");
+                }
+                System.out.println(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("player-muted-message").replace("{command}", "/mute <player> <reason>").replace("{player}", target.getName()).replace("{reason}", reason.toString())));
+                target.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("muted-message").replace("{command}", "/mute <player> <reason>").replace("{player}", "CONSOLE").replace("{reason}", reason.toString())));
             }
         }
 

@@ -28,6 +28,7 @@ error-message-kick-yourself: "§cYou can't kick yourself!"
 error-message-no-reason-for-kick: "&cIncorrect usage {command}"
 error-message-no-player-for-mute: "&cIncorrect usage {command}"
 error-message-no-reason-for-mute: "&cIncorrect usage {command}"
+error-message-no-time-for-mute: "&cIncorrect usage {command}"
 player-muted-message: "§cYou have muted {player}"
 muted-message: "&cYou've been muted by {player} for {reason}"
 player-is-muted: "§cYou are muted and cannot speak!"
@@ -72,6 +73,26 @@ world-border: true
 border: 200
 
 ## ------------------------- Ban GUI ------------------------- ##
+#Example:
+#GUI:
+#    name: "§b§lBan GUI"
+#    size: 27
+#    cancel:
+#        material: "BARRIER"
+#        slot: 26
+#    items:
+#        1:
+#           reason: "§c§lRacism"
+#           type: "ban"
+#           material: "REDSTONE_BLOCK"
+#           slot: 0
+#           length-of-punishment: "14D"
+#        2:
+#           reason: "§c§lSpamming"
+#           type: "mute"
+#           material: "OBSIDIAN"
+#           slot: 1
+#           length-of-punishment: "3D"
 GUI:
   name: "§b§lBan GUI" # This will have player name afterwards
   size: 27
@@ -80,15 +101,53 @@ GUI:
     slot: 26
   items:
     1:
-      reason: "§c§lRacism"
-      material: "REDSTONE_BLOCK"
+      reason: "§c§lGriefing"
+      type: "ban"
+      material: "RED_CONCRETE"
       slot: 0
-      length-of-ban: "14D"
+      length-of-punishment: "7D"
     2:
-      reason: "§c§lBullying"
-      material: "REDSTONE_BLOCK"
+      reason: "§c§lHacking"
+      type: "ban"
+      material: "RED_CONCRETE"
+      slot: 9
+      length-of-punishment: "7D"
+    3:
+      reason: "§c§lAdvertising"
+      type: "ban"
+      material: "RED_CONCRETE"
+      slot: 18
+      length-of-punishment: "7D"
+    4:
+      reason: "§c§lSpamming"
+      type: "tempmute"
+      material: "BLUE_CONCRETE"
       slot: 1
-      length-of-ban: "86D"
+      length-of-punishment: "3D"
+    5:
+      reason: "§c§lRacism"
+      type: "tempmute"
+      material: "BLUE_CONCRETE"
+      slot: 10
+      length-of-punishment: "7D"
+    6:
+      reason: "§c§lHarassment"
+      type: "tempmute"
+      material: "BLUE_CONCRETE"
+      slot: 19
+      length-of-punishment: "7D"
+    7:
+      reason: "§c§lAnnoying"
+      type: "kick"
+      material: "YELLOW_CONCRETE"
+      slot: 2
+      length-of-punishment: "Irrelevant"
+    8:
+        reason: "§c§lJust Because"
+        type: "ban"
+        material: "YELLOW_CONCRETE"
+        slot: 11
+        length-of-punishment: "7D"
 
 
 ## ------------------------- Ban Screen ------------------------- ##

@@ -9,16 +9,16 @@ import org.bukkit.entity.Player;
 
 public class MuteUtils {
 
-    private Set<Player> mutedPlayers;
+    private static Set<Player> mutedPlayers;
 
     public void MuteSystemConfig() {
         mutedPlayers = new HashSet<>();
     }
-    public void mutePlayer(Player player) {
+    public static void mutePlayer(Player player) {
         mutedPlayers.add(player);
     }
 
-    public void tempMutePlayer(Player player, long durationMillis) {
+    public static void tempMutePlayer(Player player, long durationMillis) {
         mutedPlayers.add(player);
 
         Timer timer = new Timer();
